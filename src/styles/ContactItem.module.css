@@ -1,0 +1,115 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0.3rem 0.3rem rgba(0, 0, 0, 0.15), -0.3rem -0.3rem #ccc;
+  transition: box-shadow 0.3s ease;
+}
+
+.item:hover {
+  box-shadow: 0 4px 8px rgba(0, 115, 230, 0.2);
+}
+
+.item p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.item p span {
+  margin-right: 8px;
+  color: #0056b3;
+}
+
+.item div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.edit_icon {
+  font-size: 1.4rem;
+  color: #0d2239;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-right: 10px;
+  outline: none;
+}
+
+.edit_icon:hover {
+  color: #003f8a;
+}
+
+.item div button {
+  background: none;
+  border: none;
+}
+.delete_icon {
+  color: #e60023;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+  outline: none;
+}
+
+.delete_icon:hover {
+  color: #b3001b;
+}
+
+.item div input[type="checkbox"] {
+  margin-left: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .item {
+    padding: 10px 15px;
+    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .item p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+
+  .item div input[type="checkbox"] {
+    margin-top: 10px;
+  }
+
+  .item div a {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 10px;
+    margin: 8px;
+  }
+
+  .item p {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
+
+  .item div a {
+    font-size: 1rem;
+  }
+
+  .item div input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+}

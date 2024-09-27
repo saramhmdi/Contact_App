@@ -1,0 +1,135 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc;
+  padding: 20px;
+  width: 750px;
+  border-radius: 10px;
+  background-color: #f5f6f6;
+  position: relative;
+}
+
+.back_to_contact_list {
+  background-color: #0073e6;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  color: #fff;
+  align-items: center;
+  padding: 10px;
+  display: inline-flex;
+  position: absolute;
+  left: 15px;
+}
+
+.back_to_contact_list:hover {
+  background-color: #d4d4d4;
+  color: #0073e6;
+}
+
+.back_to_contact_list svg {
+  font-size: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.header p {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #0073e6;
+  padding-right: 10px;
+}
+
+.form_field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form_field label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  text-align: left;
+}
+
+.form_field label span,
+.error {
+  color: #e60023;
+}
+
+.form_field input {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form_field input:focus {
+  border-color: #0073e6;
+  box-shadow: 0 0 5px rgba(0, 115, 230, 0.5);
+}
+.container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0073e6;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container button:hover {
+  background-color: #005bb5;
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+  .header p {
+    font-size: 1.5rem;
+  }
+
+  .form_field label {
+    font-size: 0.9rem;
+  }
+
+  .form_field input {
+    padding: 10px;
+  }
+
+  .container button {
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header p {
+    font-size: 1.3rem;
+  }
+
+  .form_field input {
+    font-size: 0.9rem;
+  }
+}

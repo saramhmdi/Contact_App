@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+input {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-right: 15px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #0073e6;
+  outline: none;
+}
+.icons {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.icons button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #e60023;
+  font-size: 1.6rem;
+  transition: color 0.3s ease;
+}
+.disabled {
+  opacity: 0.4;
+  outline: none;
+}
+.icons button:focus {
+  outline: none;
+}
+
+.add_icon {
+  font-size: 1.6rem;
+  color: #0073e6;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-left: 10px;
+  outline: none;
+}
+
+.icon:hover {
+  color: #005bb5;
+}
+
+@media (max-width: 768px) {
+  input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button,
+  .icon {
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,38 @@
+.container {
+  text-align: center;
+  padding: 50px;
+  background-color: #ffffff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+.container h1 {
+  font-size: 100px;
+  margin: 0;
+  color: #ff0000;
+}
+
+.container h2 {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.container p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.home_page {
+  color: #0088cc;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.home_page:hover {
+  color: #005f8d;
+}
