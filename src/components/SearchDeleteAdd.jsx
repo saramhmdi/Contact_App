@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import { Tooltip } from "react-tooltip";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 
+import { showToast } from "../utils/helpers";
 import { ContactContext } from "../context/Dispatcher";
 
 import styles from "../styles/SearchDeleteAdd.module.css";
@@ -21,6 +22,7 @@ function SearchDeleteAdd() {
   };
   const deleteSelectedContacts = () => {
     dispatch({ type: "DELETE_SELECTED_CONTACTS" });
+    showToast("Selected contacts deleted successfully!")
   };
   return (
     <div className={styles.container}>

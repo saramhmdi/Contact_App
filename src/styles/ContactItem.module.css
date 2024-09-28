@@ -47,9 +47,10 @@
   color: #003f8a;
 }
 
-.item div button {
+.button {
   background: none;
   border: none;
+  cursor: pointer;
 }
 .delete_icon {
   color: #e60023;

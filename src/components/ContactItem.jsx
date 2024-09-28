@@ -10,6 +10,7 @@ import {
 import { FaRegEdit } from "react-icons/fa";
 
 import { ContactContext } from "../context/Dispatcher";
+import { showToast } from "../utils/helpers";
 
 import styles from "../styles/ContactItem.module.css";
 
@@ -21,6 +22,10 @@ function ContactItem({ contact: { firstName, lastName, email, phone, id } }) {
 
   const isSelected = selectedContacts.includes(id);
 
+  const deleteHandler = () => {
+    dispatch({ type: "DELETE_CONTACT", payload: id });
+    showToast("Contact deleted successfully!");
+  };
   return (
     <li className={styles.item}>
       <p>{`${firstName} ${lastName}`}</p>
@@ -45,9 +50,7 @@ function ContactItem({ contact: { firstName, lastName, email, phone, id } }) {
           />
         </Link>
         <Tooltip place="top" id="edit-contact-tooltip" variant="info" />
-        <button
-          onClick={() => dispatch({ type: "DELETE_CONTACT", payload: id })}
-        >
+        <button onClick={deleteHandler} className={styles.button}>
           <MdDeleteOutline
             data-tooltip-id="delete-tooltip"
             className={styles.delete_icon}

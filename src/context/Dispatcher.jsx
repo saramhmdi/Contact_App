@@ -16,7 +16,6 @@ const initialState = {
   error: "",
   search: "",
   selectedContacts: [],
-  filteredContacts: [],
 };
 
 const reducer = (state, action) => {
@@ -26,19 +25,11 @@ const reducer = (state, action) => {
         ...state,
         isLoading: false,
         data: action.payload,
-        filteredContacts: action.payload,
       };
     case FAILED:
       return { ...state, isLoading: false, error: action.payload };
     case SET_SEARCH: {
-      const searchQuery = action.payload.toLowerCase();
-      const filteredContacts = state.data.filter(
-        ({ firstName, lastName, email, phone }) =>
-          [firstName, lastName, email, phone].some((field) =>
-            field.toLowerCase().includes(searchQuery)
-          )
-      );
-      return { ...state, search: action.payload, filteredContacts };
+      return { ...state, search: action.payload };
     }
     case TOGGLE_SELECT_CONTACT:
       const selectedContacts = state.selectedContacts.includes(action.payload)

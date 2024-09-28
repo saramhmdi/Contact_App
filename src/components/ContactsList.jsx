@@ -6,9 +6,14 @@ import styles from "../styles/ContactsList.module.css";
 
 function ContactsList() {
   const {
-    state: { filteredContacts },
+    state: { data, search },
   } = useContext(ContactContext);
-
+  const filteredContacts = data.filter(
+    ({ firstName, lastName, email, phone }) =>
+      [firstName, lastName, email, phone].some((field) =>
+        field.toLowerCase().includes(search.toLowerCase())
+      )
+  );
   return (
     <div className={styles.container}>
       <h3>Contacts List</h3>

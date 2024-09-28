@@ -7,8 +7,9 @@ import {
   MdOutlinePhoneAndroid,
   MdArrowBack,
 } from "react-icons/md";
+
 import Loader from "../components/Loader";
-import { validateField, validateFields } from "../utils/helpers";
+import { validateField, validateFields, showToast } from "../utils/helpers";
 import { ContactContext } from "../context/Dispatcher";
 
 import styles from "../styles/AddEditContact.module.css";
@@ -47,7 +48,7 @@ function AddEditContact() {
     setErrors({ ...errors, [name]: error });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = validateFields(contact);
@@ -64,9 +65,11 @@ function AddEditContact() {
 
     if (isEditMode) {
       dispatch({ type: "EDIT_CONTACT", payload: { ...contact, id } });
+      showToast("Contact edited successfully!");
     } else {
       const newContact = { ...contact, id: Date.now() };
       dispatch({ type: "ADD_CONTACT", payload: newContact });
+      showToast("Contact added successfully!");
     }
 
     navigate("/");
@@ -138,7 +141,7 @@ function AddEditContact() {
               />
               {errors.phone && <p className={styles.error}>{errors.phone}</p>}
             </div>
-            <button type="submit">
+            <button type="submit" className={styles.button}>
               {isEditMode ? "Update Contact" : "Add Contact"}
             </button>
           </form>

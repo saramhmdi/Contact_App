@@ -81,7 +81,7 @@
   border-color: #0073e6;
   box-shadow: 0 0 5px rgba(0, 115, 230, 0.5);
 }
-.container button {
+.button {
   width: 100%;
   padding: 12px;
   background-color: #0073e6;
@@ -97,7 +97,7 @@
   align-items: center;
 }
 
-.container button:hover {
+.button:hover {
   background-color: #005bb5;
   transform: scale(1.02);
 }
@@ -118,7 +118,7 @@
     padding: 10px;
   }
 
-  .container button {
+  .button {
     padding: 10px;
     font-size: 1rem;
   }
