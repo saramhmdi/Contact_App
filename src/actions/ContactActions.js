@@ -35,13 +35,3 @@ export const toggleSelectContact = (id) => ({
   type: TOGGLE_SELECT_CONTACT,
   payload: id,
 });
-
-export const success = (data) => ({
-  type: SUCCESS,
-  payload: data,
-});
-
-export const failed = (error) => ({
-  type: FAILED,
-  payload: error,
-});

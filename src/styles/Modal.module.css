@@ -1,0 +1,48 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: #451b0225 0px 7px 29px 0;
+  width: 300px;
+  text-align: center;
+}
+
+.modalButtons {
+  margin-top: 20px;
+}
+
+.confirmButton,
+.cancelButton {
+  background: #0073e6;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.cancelButton {
+  background: #dc3545;
+}
+
+.confirmButton:hover,
+.cancelButton:hover {
+  opacity: 0.8;
+}

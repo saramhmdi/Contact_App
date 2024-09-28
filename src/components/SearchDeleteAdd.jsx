@@ -6,35 +6,47 @@ import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 
 import { showToast } from "../utils/helpers";
 import { ContactContext } from "../context/Dispatcher";
+import { deleteSelectedContacts, setSearch } from "../actions/ContactActions";
+
+import Modal from "./Modal";
 
 import styles from "../styles/SearchDeleteAdd.module.css";
 
 function SearchDeleteAdd() {
-  const [search, setSearch] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [isShowModal, setIsShowModal] = useState(false);
+
   const {
     state: { selectedContacts },
     dispatch,
   } = useContext(ContactContext);
+
   const searchHandler = (e) => {
-    setSearch(e.target.value);
+    setSearchValue(e.target.value);
     const inputValue = e.target.value;
-    dispatch({ type: "SET_SEARCH", payload: inputValue });
+    dispatch(setSearch(inputValue));
   };
-  const deleteSelectedContacts = () => {
-    dispatch({ type: "DELETE_SELECTED_CONTACTS" });
-    showToast("Selected contacts deleted successfully!")
+
+  const confirmDeleteHandler = () => {
+    dispatch(deleteSelectedContacts());
+    showToast("Selected contacts deleted successfully!");
+    setIsShowModal(false);
+  };
+
+  const showDeleteConfirmationModal = () => {
+    setIsShowModal(true);
   };
   return (
     <div className={styles.container}>
       <input
         type="text"
         placeholder="🔍Search..."
-        value={search}
+        value={searchValue}
         onChange={searchHandler}
       />
       <div className={styles.icons}>
         <button
-          onClick={deleteSelectedContacts}
+          onClick={showDeleteConfirmationModal}
           disabled={selectedContacts.length === 0}
         >
           <MdDeleteOutline
@@ -57,6 +69,13 @@ function SearchDeleteAdd() {
         </Link>
         <Tooltip place="left" id="add-tooltip" variant="info" />
       </div>
+      {isShowModal && (
+        <Modal
+          message="Are you sure you want to delete selected contacts?"
+          onConfirm={confirmDeleteHandler}
+          onCancel={() => setIsShowModal(false)}
+        />
+      )}
     </div>
   );
 }

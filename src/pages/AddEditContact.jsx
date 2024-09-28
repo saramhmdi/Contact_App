@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-
 import { IoPersonAddSharp } from "react-icons/io5";
 import {
   MdOutlineAlternateEmail,
   MdOutlinePhoneAndroid,
   MdArrowBack,
 } from "react-icons/md";
-
 import Loader from "../components/Loader";
 import { validateField, validateFields, showToast } from "../utils/helpers";
 import { ContactContext } from "../context/Dispatcher";
+import { addContact, editContact } from "../actions/ContactActions";
+import Modal from "../components/Modal";
 
 import styles from "../styles/AddEditContact.module.css";
 
@@ -30,6 +30,7 @@ function AddEditContact() {
     phone: "",
   });
   const [errors, setErrors] = useState({});
+  const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
     if (isEditMode) {
@@ -63,15 +64,19 @@ function AddEditContact() {
       return;
     }
 
+    setIsShowModal(true);
+  };
+
+  const confirmHandler = () => {
     if (isEditMode) {
-      dispatch({ type: "EDIT_CONTACT", payload: { ...contact, id } });
+      dispatch(editContact({ ...contact, id }));
       showToast("Contact edited successfully!");
     } else {
       const newContact = { ...contact, id: Date.now() };
-      dispatch({ type: "ADD_CONTACT", payload: newContact });
+      dispatch(addContact(newContact));
       showToast("Contact added successfully!");
     }
-
+    setIsShowModal(false);
     navigate("/");
   };
 
@@ -146,6 +151,15 @@ function AddEditContact() {
             </button>
           </form>
         </div>
+      )}
+      {isShowModal && (
+        <Modal
+          message={`Are you sure you want to ${
+            isEditMode ? "edit" : "add"
+          } this contact?`}
+          onConfirm={confirmHandler}
+          onCancel={() => setIsShowModal(false)}
+        />
       )}
     </div>
   );

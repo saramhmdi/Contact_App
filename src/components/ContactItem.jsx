@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { Tooltip } from "react-tooltip";
 import {
@@ -11,6 +11,8 @@ import { FaRegEdit } from "react-icons/fa";
 
 import { ContactContext } from "../context/Dispatcher";
 import { showToast } from "../utils/helpers";
+import { deleteContact, toggleSelectContact } from "../actions/ContactActions";
+import Modal from "./Modal";
 
 import styles from "../styles/ContactItem.module.css";
 
@@ -19,12 +21,14 @@ function ContactItem({ contact: { firstName, lastName, email, phone, id } }) {
     state: { selectedContacts },
     dispatch,
   } = useContext(ContactContext);
-
+  const [isShowModal, setIsShowModal] = useState(false);
   const isSelected = selectedContacts.includes(id);
-
-  const deleteHandler = () => {
-    dispatch({ type: "DELETE_CONTACT", payload: id });
+  const confirmDeleteHandler = () => {
+    dispatch(deleteContact(id));
     showToast("Contact deleted successfully!");
+  };
+  const deleteHandler = () => {
+    setIsShowModal(true);
   };
   return (
     <li className={styles.item}>
@@ -65,11 +69,16 @@ function ContactItem({ contact: { firstName, lastName, email, phone, id } }) {
         <input
           type="checkbox"
           checked={isSelected}
-          onChange={() =>
-            dispatch({ type: "TOGGLE_SELECT_CONTACT", payload: id })
-          }
+          onChange={() => dispatch(toggleSelectContact(id))}
         />
       </div>
+      {isShowModal && (
+        <Modal
+          message="Are you sure you want to delete contact?"
+          onConfirm={confirmDeleteHandler}
+          onCancel={() => setIsShowModal(false)}
+        />
+      )}
     </li>
   );
 }
