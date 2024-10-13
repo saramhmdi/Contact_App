@@ -63,7 +63,6 @@ function AddEditContact() {
     if (hasErrors || hasEmptyFields) {
       return;
     }
-
     setIsShowModal(true);
   };
 
@@ -72,7 +71,7 @@ function AddEditContact() {
       dispatch(editContact({ ...contact, id }));
       showToast("Contact edited successfully!");
     } else {
-      const newContact = { ...contact, id: Date.now() };
+      const newContact = { ...contact, id: Date.now().toString() };
       dispatch(addContact(newContact));
       showToast("Contact added successfully!");
     }
