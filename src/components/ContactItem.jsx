@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
+import axios from "axios";
 
 import { Tooltip } from "react-tooltip";
 import {
@@ -23,9 +24,14 @@ function ContactItem({ contact: { firstName, lastName, email, phone, id } }) {
   } = useContext(ContactContext);
   const [isShowModal, setIsShowModal] = useState(false);
   const isSelected = selectedContacts.includes(id);
-  const confirmDeleteHandler = () => {
-    dispatch(deleteContact(id));
-    showToast("Contact deleted successfully!");
+  const confirmDeleteHandler = async () => {
+    try {
+      await axios.delete(`http://localhost:8000/contacts/${id}`);
+      dispatch(deleteContact(id));
+      showToast("Contact deleted successfully!");
+    } catch (error) {
+      showToast("Failed to delete contact!", "error");
+    }
   };
   const deleteHandler = () => {
     setIsShowModal(true);

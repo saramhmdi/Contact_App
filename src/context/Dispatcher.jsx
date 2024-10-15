@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useReducer, useEffect } from "react";
 import {
   ADD_CONTACT,
@@ -25,6 +26,7 @@ const reducer = (state, action) => {
         ...state,
         isLoading: false,
         data: action.payload,
+        error: ""
       };
     case FAILED:
       return { ...state, isLoading: false, error: action.payload };
@@ -70,15 +72,13 @@ export const ContactContext = createContext();
 
 const ContactsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const res = await fetch("http://localhost:8000/contacts");
-        const json = await res.json();
-        dispatch({ type: SUCCESS, payload: json });
+        const res = await axios.get("http://localhost:8000/contacts");
+        dispatch({ type: SUCCESS, payload: res.data });
       } catch (error) {
-        dispatch({ type: FAILED, payload: error.message });
+        dispatch({ type: FAILED, payload: "Failed to connect to the server" });
       }
     };
     fetchContacts();

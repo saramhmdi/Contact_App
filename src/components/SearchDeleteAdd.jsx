@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
+import axios from "axios";
 
 import { Tooltip } from "react-tooltip";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -27,10 +28,20 @@ function SearchDeleteAdd() {
     dispatch(setSearch(inputValue));
   };
 
-  const confirmDeleteHandler = () => {
+  const confirmDeleteHandler =async () => {
+    try{
+      const deleteRequests = selectedContacts.map((id) =>
+        axios.delete(`http://localhost:8000/contacts/${id}`)
+      );
+      await axios.all(deleteRequests);
     dispatch(deleteSelectedContacts());
     showToast("Selected contacts deleted successfully!");
     setIsShowModal(false);
+    }catch(error){
+      showToast("Failed to delete selected contacts!", "error");
+
+    }
+
   };
 
   const showDeleteConfirmationModal = () => {

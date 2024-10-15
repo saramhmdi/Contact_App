@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { IoPersonAddSharp } from "react-icons/io5";
 import {
@@ -66,19 +67,32 @@ function AddEditContact() {
     setIsShowModal(true);
   };
 
-  const confirmHandler = () => {
+  const confirmHandler = async () => {
     if (isEditMode) {
-      dispatch(editContact({ ...contact, id }));
-      showToast("Contact edited successfully!");
+      try {
+        await axios.put(`http://localhost:8000/contacts/${id}`, contact);
+        dispatch(editContact({ ...contact, id }));
+        showToast("Contact edited successfully!");
+      } catch (error) {
+        showToast("Failed to edit contact!", "error");
+      }
     } else {
-      const newContact = { ...contact, id: Date.now().toString() };
-      dispatch(addContact(newContact));
-      showToast("Contact added successfully!");
+      try {
+        const newContact = { ...contact, id: Date.now().toString() };
+        const res = await axios.post(
+          "http://localhost:8000/contacts",
+          newContact
+        );
+        console.log(res);
+        dispatch(addContact(res.data));
+        showToast("Contact added successfully!");
+      } catch (error) {
+        showToast("Failed to add contact!", "error");
+      }
     }
     setIsShowModal(false);
     navigate("/");
   };
-
   return (
     <div className={styles.wrapper}>
       {isLoading ? (

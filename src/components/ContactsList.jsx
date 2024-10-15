@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { ContactContext } from "../context/Dispatcher";
 
 import ContactItem from "./ContactItem";
@@ -6,7 +7,7 @@ import styles from "../styles/ContactsList.module.css";
 
 function ContactsList() {
   const {
-    state: { data, search },
+    state: { data, search, error },
   } = useContext(ContactContext);
   const filteredContacts = data.filter(
     ({ firstName, lastName, email, phone }) =>
@@ -14,6 +15,9 @@ function ContactsList() {
         field.toLowerCase().includes(search.toLowerCase())
       )
   );
+  if (error) {
+    return <p className={styles.error_message}>Error: {error}</p>; 
+  }
   return (
     <div className={styles.container}>
       <h3>Contacts List</h3>
